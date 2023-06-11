@@ -24,6 +24,8 @@ import { SignFormComponent } from './components/sign-form/sign-form.component';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guard/auth.guard';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -71,6 +73,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes, { enableTracing: true }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
