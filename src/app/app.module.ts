@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -22,23 +22,24 @@ import { RateComponent } from './components/rate/rate.component';
 import { SearchComponent } from './components/search/search.component';
 import { SignFormComponent } from './components/sign-form/sign-form.component';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guard/auth.guard';
-
-import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './guard/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
   { path: 'all-product', component: AllProductComponent },
   { path: 'by-category/:id', component: ByCategoryComponent },
-  { path: 'cart', component: CartComponent, canActivate: [authGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'search/:keyword', component: SearchComponent },
   { path: 'search', component: AllProductComponent },
-  { path: 'favorites', component: FavoriteComponent, canActivate: [authGuard] },
+  { path: 'favorites', component: FavoriteComponent, canActivate: [AuthGuard] },
   { path: 'sign-form', component: SignFormComponent },
   { path: 'about', component: AboutComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -70,12 +71,25 @@ const routes: Routes = [
     SignFormComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
+    
     RouterModule.forRoot(routes, { enableTracing: true }),
-    HttpClientModule
-  ],
-  providers: [],
+    // NgModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      // progressBar: true,
+      progressAnimation: 'increasing',
+      // preventDuplicates: true,
+      closeButton: true,
+    }),
+    ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

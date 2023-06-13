@@ -39,14 +39,14 @@
                             </div>
                             <div class="menu__content">
                                 <ul class="menu--dropdown">
-                                    <li>
-                                        <a>Thông tin người dùng</a>
+                                    <li *ngIf="isLogin">
+                                        <a [routerLink]="['/profile']">Thông tin người dùng</a>
                                     </li>
-                                    <li>
-                                        <a>Đăng nhập &amp; Đăng ký</a>
+                                    <li *ngIf="!isLogin">
+                                        <a [routerLink]="['/sign-form']">Đăng nhập &amp; Đăng ký</a>
                                     </li>
-                                    <li>
-                                        <a>Đăng xuất</a>
+                                    <li *ngIf="isLogin">
+                                        <a href="javascript:void(0);" (click)="logout()">Đăng xuất</a>
                                     </li>
                                 </ul>
                             </div>
@@ -74,7 +74,7 @@
                     <li class="menu-item"><a [routerLink]="['/all-product']">Cửa hàng</a></li>
                     <li class="menu-item"><a [routerLink]="['/about']">Giới thiệu</a></li>
                     <li class="menu-item"><a [routerLink]="['/contact']">Liên hệ</a></li>
-                    <li class="menu-item"><a>Đăng nhập &amp; Đăng ký</a></li>
+                    <li class="menu-item" *ngIf="!isLogin"><a [routerLink]="['/sign-form']">Đăng nhập &amp; Đăng ký</a></li>
                 </ul>
             </div>
         </div>
