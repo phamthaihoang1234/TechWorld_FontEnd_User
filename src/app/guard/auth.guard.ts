@@ -1,5 +1,21 @@
-import { CanActivateFn } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, CanActivateFn, Router } from '@angular/router';
+import { SessionService } from '../services/session.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  return true;
-};
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  
+  constructor(public session: SessionService, private _router: Router) { }
+
+  canActivate(): boolean {
+    if (this.session.getUser()) {
+      return true;
+    } else {
+      this._router.navigate(['/sign-form'])
+      return false;
+    }
+  }
+  
+}
