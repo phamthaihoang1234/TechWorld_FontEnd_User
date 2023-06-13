@@ -80,6 +80,7 @@ const routes: Routes = [
     
     RouterModule.forRoot(routes, { enableTracing: true }),
     // NgModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 2500,
       // progressBar: true,
