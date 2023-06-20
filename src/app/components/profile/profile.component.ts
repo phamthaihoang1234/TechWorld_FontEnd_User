@@ -13,8 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit{
 
-  customer!: Customer;
-  email = this.sessionService.getUser();
+  "customer": Customer;
+  private email = this.sessionService.getUser();
 
   constructor(private sessionService: SessionService,
               private customerService: CustomerService,
@@ -23,8 +23,7 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(this.email);
-    if (this.email != null) {
-      this.profileService.getPersonalProfile(this.email).subscribe((u:Customer) => {
+      this.profileService.getPersonalProfile(this.email).subscribe(u => {
         console.log(u);
         this.customer = u;
       }, error => {
@@ -35,8 +34,6 @@ export class ProfileComponent implements OnInit{
           timer: 1500
         })
       });
-    }
-    
     
   }
 
