@@ -94,7 +94,7 @@ export class SignFormComponent {
 
   sign_in() {
     this.login = this.loginForm.value;
-
+    console.log(this.loginForm.value);
     this.authService.login(this.login).subscribe(
       data => {
         console.log("vao sigiinn ", data)
