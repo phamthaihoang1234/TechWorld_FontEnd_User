@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Customer } from 'src/app/common/Customer';
-import { CustomerService } from 'src/app/services/customer.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SessionService } from 'src/app/services/session.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -13,27 +10,16 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit{
 
-  "customer": Customer;
+  customer!: Customer;
   private email = this.sessionService.getUser();
 
-  constructor(private sessionService: SessionService,
-              private customerService: CustomerService,
-              private router: Router, 
+  constructor(private sessionService: SessionService, 
               private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    console.log(this.email);
-      this.profileService.getPersonalProfile(this.email).subscribe(u => {
-        console.log(u);
-        this.customer = u;
-      }, error => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Chưa đăng nhập',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      });
+    this.profileService.getPersonalProfile(this.email).subscribe((c : Customer) => {
+      this.customer = c;
+    });
     
   }
 
