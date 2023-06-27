@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CartDetail } from '../common/CartDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,8 @@ export class CartService {
     return this.httpClient.get(this.urlCartDetail+'/cart'+ cartId);
   }
 
-  
+  postCartDetail(detail : CartDetail){
+return this.httpClient.post(this.urlCartDetail,detail);
+
+  }
 }
