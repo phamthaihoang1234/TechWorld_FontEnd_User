@@ -46,4 +46,8 @@ export class CartService {
 return this.httpClient.post(this.urlCartDetail,detail);
 
   }
+
+  deleteDetail(detailId:number) {
+    return this.httpClient.delete(this.urlCartDetail+'/'+detailId);
+  }
 }
