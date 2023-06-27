@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartDetail } from '../common/CartDetail';
+import { Cart } from '../common/Cart';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,14 @@ export class CartService {
   getAllCartDetail(cartId: number){
 
     return this.httpClient.get(this.urlCartDetail+'/cart'+ cartId);
+  }
+
+  updateCart(email:string, cart: Cart) {
+    return this.httpClient.put(this.urlCart+'/user/'+email, cart);
+  }
+
+  getCart(email: string) {
+    return this.httpClient.get(this.urlCart+'/user/'+email);
   }
 
   postCartDetail(detail : CartDetail){
