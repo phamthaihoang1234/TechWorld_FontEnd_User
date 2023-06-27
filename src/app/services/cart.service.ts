@@ -20,6 +20,10 @@ export class CartService {
     this.totalCartItems.next(totalItem);
   }
 
+  getOneDetail(detailId:number) {
+    return this.httpClient.get(this.urlCartDetail+'/'+detailId);
+  }
+
   getAllCartDetail(cartId: number){
 
     return this.httpClient.get(this.urlCartDetail+'/cart'+ cartId);
