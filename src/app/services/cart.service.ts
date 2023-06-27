@@ -38,6 +38,10 @@ export class CartService {
     return this.httpClient.get(this.urlCart+'/user/'+email);
   }
 
+  updateDetail(detail: CartDetail) {
+    return this.httpClient.put(this.urlCartDetail, detail);
+  }
+
   postCartDetail(detail : CartDetail){
 return this.httpClient.post(this.urlCartDetail,detail);
 
