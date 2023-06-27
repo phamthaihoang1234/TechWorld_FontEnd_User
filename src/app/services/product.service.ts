@@ -38,4 +38,25 @@ export class ProductService {
   getLasted(){
     return this.HttpClient.get(this.url + '/latest');
   }
+
+  getBestSeller(){
+    return this.HttpClient.get(this.url+'/bestseller');
+  }
+
+  getRated(){
+    return this.HttpClient.get(this.url+ '/rated');
+
+  }
+
+  getOne(id: number){
+    return this.HttpClient.get(this.url+'/'+id);
+  }
+
+  getByCategory(id: number){
+    return this.HttpClient.get(this.url+'/category/'+id);
+  }
+
+  getSuggest(categoryId: number , productId: number){
+    return this.HttpClient.get(this.url +'/suggest/'+ categoryId+ '/'+ productId);
+  }
 }
