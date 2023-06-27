@@ -18,4 +18,11 @@ export class CartService {
   setLength(totalItem: number){
     this.totalCartItems.next(totalItem);
   }
+
+  getAllCartDetail(cartId: number){
+
+    return this.httpClient.get(this.urlCartDetail+'/cart'+ cartId);
+  }
+
+  
 }
