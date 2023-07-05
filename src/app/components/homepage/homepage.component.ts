@@ -9,6 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomepageComponent implements OnInit{
 
+  slideConfig = { "slidesToShow": 4, "slidesToScroll": 4, "autoplay": true, "centerMode": true };
   trend_products!: Product[];
   bestSeller_products!: Product[];
   highlight_products!: Product[];
