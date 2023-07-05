@@ -9,7 +9,7 @@ import { Customer } from '../common/Customer';
 })
 export class ProfileService {
 
-  url = "http://localhost:8081/api/account/profile";
+  url = "http://localhost:8080/api/auth/profile";
   constructor(private http: HttpClient) { }
 
   getPersonalProfile(email: string): Observable<any> {

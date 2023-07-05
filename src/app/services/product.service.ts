@@ -8,10 +8,10 @@ import { Product } from '../common/Product';
 })
 export class ProductService {
 
-  private trending = "http://localhost:8081/trending-products";
-  private bestSeller = "http://localhost:8081/bestseller-products";
-  private highlight = "http://localhost:8081/highlight-products";
-  private all = "http://localhost:8081/all-products";
+  private trending = "http://localhost:8080/api/products/rated";
+  private bestSeller = "http://localhost:8080/api/products/bestseller";
+  private highlight = "http://localhost:8080/api/products/latest";
+  private all = "http://localhost:8080/api/products/";
 
   constructor(private http: HttpClient) {
     
