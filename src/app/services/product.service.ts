@@ -12,6 +12,7 @@ export class ProductService {
   private bestSeller = "http://localhost:8080/api/products/bestseller";
   private highlight = "http://localhost:8080/api/products/latest";
   private all = "http://localhost:8080/api/products/";
+  private rated = "http://localhost:8080/api/products/rated";
 
   constructor(private http: HttpClient) {
     
@@ -31,5 +32,9 @@ export class ProductService {
 
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]> (`${this.all}`);
+  }
+
+  getRatedProduct(): Observable<Product[]> {
+    return this.http.get<Product[]> (`${this.rated}`);
   }
 }

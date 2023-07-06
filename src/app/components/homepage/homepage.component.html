@@ -243,12 +243,12 @@
                           </a>
                           <div class="ps-product__content">
                             <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
-                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
-                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                            <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <!-- <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
                                           title="{{getAvgRate(item.productId)}} sao">
                               </ngb-rating>
-                              ({{countRate}} đánh giá)
-                            </div> -->
+                              ({{countRate}} đánh giá) -->
+                            </div>
                             <p class="ps-product__price sale">
                               <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
                               {{item.price*(1 - item.discount/100) | currency:'VND'}}

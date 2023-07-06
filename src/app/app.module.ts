@@ -28,7 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+// import { NgbRatingModule} from '@ng-bootstrap/ng-bootstrap'; 
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -91,7 +91,8 @@ const routes: Routes = [
       closeButton: true,
     }),
     SlickCarouselModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    // NgbRatingModule
     ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
