@@ -14,18 +14,6 @@ export class HomepageComponent implements OnInit{
   bestSeller_products!: Product[];
   highlight_products!: Product[];
   
-  getAvgRate(productId : number) : number {
-    let ratedProduct: number = 0;
-    this.productService.getRatedProduct().subscribe((data: Product[]) => {
-      data.forEach(element => {
-        if (element.productId == productId) {
-          ratedProduct = element.productId;
-        }
-      });
-    })
-    return ratedProduct;
-  }
-
   constructor(private productService: ProductService) {}
   ngOnInit(): void {
     this.productService.getTrendingProducts().subscribe((data: Product[]) => {
