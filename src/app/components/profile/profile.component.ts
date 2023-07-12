@@ -17,7 +17,8 @@ export class ProfileComponent implements OnInit{
               private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    this.profileService.getPersonalProfile(this.email).subscribe((c : Customer) => {
+    this.profileService.getPersonalProfile(this.email).subscribe((c : any) => {
+      // console.log(c);
       this.customer = c;
     });
     
