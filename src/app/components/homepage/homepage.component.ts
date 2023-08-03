@@ -21,26 +21,8 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class HomepageComponent implements OnInit{
 
-  // trend_products!: Product[];
-  // bestSeller_products!: Product[];
-  // highlight_products!: Product[];
-  // constructor(private productService: ProductService) {}
-  // ngOnInit(): void {
-  //   this.productService.getTrendingProducts().subscribe((data: Product[]) => {
-  //     console.log(data);
-  //     this.trend_products = data;
-  //   });
 
-  //   this.productService.getBestSellerProducts().subscribe((data: Product[]) => {
-  //     console.log(data);
-  //     this.bestSeller_products = data;
-  //   });
 
-  //   this.productService.getHighlightProducts().subscribe((data: Product[]) => {
-  //     console.log(data);
-  //     this.highlight_products = data;
-  //   });
-  // }
 
   customer! : Customer;
   favoriteList! : Favorites[];
@@ -215,5 +197,6 @@ export class HomepageComponent implements OnInit{
 
 
     
+
 
 }

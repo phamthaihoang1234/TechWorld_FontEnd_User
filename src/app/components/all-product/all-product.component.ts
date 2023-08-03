@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,11 +17,13 @@ import { ProductService } from 'src/app/services/product.service';
 import { RateService } from 'src/app/services/rate.service';
 import { SessionService } from 'src/app/services/session.service';
 
+
 @Component({
   selector: 'app-all-product',
   templateUrl: './all-product.component.html',
   styleUrls: ['./all-product.component.css']
 })
+
 export class AllProductComponent {
   products!: Product[];
   isLoading = true;
@@ -180,6 +183,7 @@ export class AllProductComponent {
           this.getProducts();
         }
   }
+
 
 
 }

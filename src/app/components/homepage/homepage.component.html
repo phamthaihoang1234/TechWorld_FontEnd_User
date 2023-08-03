@@ -77,26 +77,54 @@
             </div>
             <br>
             <div class="ps-section__content">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let trend of trend_products">
-                                    <td>
-                                        {{trend.name}}
-                                    </td>
-                                    <td>
-                                        {{trend.description}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let item of trend_products  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                      <div class="ps-product">
+                        <div class="ps-product__thumbnail">
+                          <a href="javascript:void(0);">
+                            <img [src]="item.image" [routerLink]="['/product-detail/'+item.productId]" alt="" />
+                          </a>
+                          <div class="ps-product__badge">-{{item.discount}}%</div>
+                          <ul class="ps-product__actions">
+                            <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Thêm Giỏ Hàng"><i class="icon-bag2"></i></a></li>
+                            <li><a [routerLink]="['/product-detail/'+item.productId]" data-toggle="tooltip" data-placement="top" title="Xem Chi Tiết"><i class="icon-eye"></i></a></li>
+                            <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Yêu Thích"><i class="icon-heart"></i></a></li>
+                          </ul>
+                        </div>
+                        <div class="ps-product__container">
+                          <a class="ps-product__vendor" href="javascript:void(0);">
+                            <span> {{item.category.categoryName}}</span>
+                          </a>
+                          <div class="ps-product__content">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                          <div class="ps-product__content hover">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                </ngx-slick-carousel>
             </div>
         </div>
     </div>
@@ -122,26 +150,54 @@
             </div>
             <br>
             <div class="ps-section__content">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let best of bestSeller_products">
-                                    <td>
-                                        {{best.name}}
-                                    </td>
-                                    <td>
-                                        {{best.description}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let item of bestSeller_products | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide" >
+                      <div class="ps-product">
+                        <div class="ps-product__thumbnail">
+                          <a href="javascript:void(0);">
+                            <img [src]="item.image" [routerLink]="['/product-detail/'+item.productId]" alt="" />
+                          </a>
+                          <div class="ps-product__badge">-{{item.discount}}%</div>
+                          <!-- <ul class="ps-product__actions">
+                            <li><a href="javascript:void(0);" (click)="addCart(item.productId, item.price*(1 - item.discount/100))" data-toggle="tooltip" data-placement="top" title="Thêm Giỏ Hàng"><i class="icon-bag2"></i></a></li>
+                            <li><a [routerLink]="['/product-detail/'+item.productId]" data-toggle="tooltip" data-placement="top" title="Xem Chi Tiết"><i class="icon-eye"></i></a></li>
+                            <li><a href="javascript:void(0);" (click)="toggleLike(item.productId)" data-toggle="tooltip" data-placement="top" title="Yêu Thích"><i class="icon-heart"></i></a></li>
+                          </ul> -->
+                        </div>
+                        <div class="ps-product__container">
+                          <a class="ps-product__vendor" href="javascript:void(0);">
+                            <span> {{item.category.categoryName}}</span>
+                          </a>
+                          <div class="ps-product__content">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                          <div class="ps-product__content hover">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </ngx-slick-carousel>
             </div>
         </div>
     </div>
@@ -167,26 +223,54 @@
             </div>
             <br>
             <div class="ps-section__content">
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let highlight of highlight_products">
-                                    <td>
-                                        {{highlight.name}}
-                                    </td>
-                                    <td>
-                                        {{highlight.description}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let item of highlight_products  | paginate: { itemsPerPage: 8, currentPage: 0}" class="slide">
+                      <div class="ps-product">
+                        <div class="ps-product__thumbnail">
+                          <a href="javascript:void(0);">
+                            <img [src]="item.image" [routerLink]="['/product-detail/'+item.productId]" alt="" />
+                          </a>
+                          <div class="ps-product__badge">-{{item.discount}}%</div>
+                          <ul class="ps-product__actions">
+                            <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Thêm Giỏ Hàng"><i class="icon-bag2"></i></a></li>
+                            <li><a [routerLink]="['/product-detail/'+item.productId]" data-toggle="tooltip" data-placement="top" title="Xem Chi Tiết"><i class="icon-eye"></i></a></li>
+                            <li><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Yêu Thích"><i class="icon-heart"></i></a></li>
+                          </ul>
+                        </div>
+                        <div class="ps-product__container">
+                          <a class="ps-product__vendor" href="javascript:void(0);">
+                            <span> {{item.category.categoryName}}</span>
+                          </a>
+                          <div class="ps-product__content">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                          <div class="ps-product__content hover">
+                            <a class="ps-product__title" [routerLink]="['/product-detail/'+item.productId]">{{item.name}}</a>
+                            <!-- <div class="ps-product__desc" *ngIf="getAvgRate(item.productId)>0">
+                              <ngb-rating [rate]="getAvgRate(item.productId)" [starTemplate]="t" [readonly]="true" [max]="5"
+                                          title="{{getAvgRate(item.productId)}} sao">
+                              </ngb-rating>
+                              ({{countRate}} đánh giá)
+                            </div> -->
+                            <p class="ps-product__price sale">
+                              <del *ngIf="item.discount != 0">{{item.price|currency:'VND'}}</del>
+                              {{item.price*(1 - item.discount/100) | currency:'VND'}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                </ngx-slick-carousel>
             </div>
         </div>
     </div>
