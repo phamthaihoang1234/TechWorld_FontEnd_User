@@ -17,14 +17,13 @@ import { ProductService } from 'src/app/services/product.service';
 import { RateService } from 'src/app/services/rate.service';
 import { SessionService } from 'src/app/services/session.service';
 
-
 @Component({
   selector: 'app-all-product',
   templateUrl: './all-product.component.html',
   styleUrls: ['./all-product.component.css']
 })
 
-export class AllProductComponent {
+export class AllProductComponent implements OnInit {
   products!: Product[];
   isLoading = true;
   customer!: Customer;
@@ -111,9 +110,9 @@ export class AllProductComponent {
     this.cartService.getCart(email).subscribe(data => {
       this.cart = data as Cart;
       this.cartDetail = new CartDetail(0, 1, price, new Product(productId), new Cart(this.cart.cartId));
-      this.cartService.postCartDetail(this.cartDetail).subscribe(data => {
+      this.cartService.postDetail(this.cartDetail).subscribe(data => {
         this.toastr.success('Thêm vào giỏ hàng thành công!', 'Hệ thống!');
-        this.cartService.getAllCartDetail(this.cart.cartId).subscribe(data => {
+        this.cartService.getAllDetail(this.cart.cartId).subscribe(data => {
           this.cartDetails = data as CartDetail[];
           this.cartService.setLength(this.cartDetails.length);
         })
@@ -183,7 +182,6 @@ export class AllProductComponent {
           this.getProducts();
         }
   }
-
 
 
 }
