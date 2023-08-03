@@ -15,7 +15,8 @@ export class Customer {
     'roles': Role[];
     'token': string;
 
-    constructor(id: number) {
+    constructor(id: number,name : string) {
         this.userId = id;
+        this.name = name;
     }
 }

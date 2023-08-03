@@ -8,26 +8,37 @@ import { Product } from '../common/Product';
 })
 export class ProductService {
 
-  private trending = "http://localhost:8081/api/products/rated";
-  private bestSeller = "http://localhost:8081/api/products/bestseller";
-  private highlight = "http://localhost:8081/api/products/latest";
-  private all = "http://localhost:8081/api/products/";
-  private rated = "http://localhost:8081/api/products/rated";
 
-  constructor(private http: HttpClient) {
-    
-  }
-  
-  getTrendingProducts(): Observable<Product[]> {
-    return this.http.get<Product[]> (`${this.trending}`);
+  url = 'http://localhost:8080/api/products';
+  constructor(private HttpClient: HttpClient){}
+
+  getAll(){
+    return this.HttpClient.get(this.url);
   }
 
-  getBestSellerProducts(): Observable<Product[]> {
-    return this.http.get<Product[]> (`${this.bestSeller}`);
+  getLasted(){
+    return this.HttpClient.get(this.url + '/latest');
   }
 
-  getHighlightProducts(): Observable<Product[]> {
-    return this.http.get<Product[]> (`${this.highlight}`);
+  getBestSeller(){
+    return this.HttpClient.get(this.url+'/bestseller');
+  }
+
+  getRated(){
+    return this.HttpClient.get(this.url+ '/rated');
+
+  }
+
+  getOne(id: number){
+    return this.HttpClient.get(this.url+'/'+id);
+  }
+
+  getByCategory(id: number){
+    return this.HttpClient.get(this.url+'/category/'+id);
+  }
+
+  getSuggest(categoryId: number , productId: number){
+    return this.HttpClient.get(this.url +'/suggest/'+ categoryId+ '/'+ productId);
   }
 
   getAllProducts(): Observable<Product[]> {
