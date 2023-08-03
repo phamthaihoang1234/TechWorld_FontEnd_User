@@ -181,7 +181,37 @@ export class HomepageComponent implements OnInit{
         })        
       }
 
-      
+
+      addCart(productId: number, price: number){
+        let email = this.sessionService.getUser();
+        if(email == null){
+          this.cartDetail = new CartDetail(0, 1, price, new Product(productId), new Cart(1));
+          this.cartListDetails.push(this.cartDetail);
+          this.toastr.success('Thêm vào giỏ hàng thành công!', 'Hệ thống!');
+
+        }
+        this.cartService.getCart(email).subscribe(data => {
+          this.cart = data as Cart;
+          this.cartDetail = new CartDetail(0, 1, price, new Product(productId), new Cart(this.cart.cartId));
+          this.cartService.postCartDetail(this.cartDetail).subscribe(data => {
+            this.toastr.success('Thêm vào giỏ hàng thành công!', 'Hệ thống!');
+            this.cartService.getAllCartDetail(this.cart.cartId).subscribe(data => {
+              this.cartListDetails = data as CartDetail[];
+              this.cartService.setLength(this.cartListDetails.length);
+            })
+          }, error => {
+            this.toastr.error('Sản phẩm này có thể đã hết hàng!', 'Hệ thống');
+            this.router.navigate(['/home']);
+            window.location.href = "/";
+          })
+        })
+
+
+
+
+
+
+      }
 
 
     
